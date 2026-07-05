@@ -10,7 +10,7 @@ function App() {
       </p>
 
       <button
-        className="mt-8 rounded-full bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500"
+        className="mt-8 rounded-full bg-blue-600 px-6 py-3 font-semibold transition duration-200 hover:bg-blue-500 hover:scale-106"
       >
         Get Started
       </button>

@@ -6,10 +6,8 @@ import {
 
 function getGreeting() {
   const hour = new Date().getHours();
-
   if (hour < 12) return "Good Morning";
   if (hour < 18) return "Good Afternoon";
-
   return "Good Evening";
 }
 
@@ -23,42 +21,30 @@ export default function Sidebar({
   deviceName,
 }: SidebarProps) {
   return (
-    <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#11161D]">
-
-      {/* Ambient Glow */}
-
+    <div className="relative h-full">
+      {/* Ambient Glow — radiates from behind the card, spilling to the left */}
       <div
-        className="
-          pointer-events-none
-          absolute
-          -left-24
-          -top-24
-          h-72
-          w-72
-          rounded-full
-          bg-blue-500/10
-          blur-3xl
-        "
+        className="pointer-events-none absolute top-1/2 h-[700px] w-[560px] -translate-y-1/2 opacity-90 blur-[110px]"
+        style={{
+          right: "-40px",
+          background:
+            "radial-gradient(circle at right center, #818cf8 0%, #6366f1 28%, #7c3aed 52%, transparent 72%)",
+        }}
       />
 
+      <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#11161D]">
       {/* Header */}
-
       <header className="relative px-8 pt-8">
-
         <p className="text-sm text-zinc-500">
           {getGreeting()}
         </p>
-
         <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">
           {userName}
         </h1>
-
       </header>
 
       {/* Search */}
-
       <div className="relative px-8 pt-8">
-
         <div
           className="
             flex
@@ -68,90 +54,75 @@ export default function Sidebar({
             rounded-2xl
             bg-[#1A202B]
             px-4
-
             transition-all
             duration-300
-
             focus-within:scale-[1.02]
             focus-within:bg-[#222938]
           "
         >
-
           <Search
             size={18}
             className="text-zinc-500"
           />
-
           <input
-            placeholder="Search convos..."
+            placeholder="Search conversations..."
             className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
           />
-
         </div>
-
       </div>
 
       {/* Section Title */}
-
       <div className="relative px-8 pt-8">
-
         <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
           Conversations
         </p>
-
       </div>
 
       {/* Empty State */}
-
       <div className="relative -mt-10 flex flex-1 flex-col items-center justify-center px-8">
-
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1A202B]">
-
           <MessageCircleMore
             size={34}
             className="text-zinc-500"
           />
-
         </div>
-
         <h2 className="mt-6 text-lg font-semibold text-white">
           No conversations
         </h2>
-
         <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-zinc-500">
           Nearby devices will appear here once discovered.
         </p>
-
       </div>
 
       {/* Footer */}
-
       <footer className="relative px-5 pb-5 pt-4">
-
         <div
           className="
             rounded-2xl
             bg-[#1A202B]
             p-4
-
             transition-all
             duration-300
-
             hover:-translate-y-1
             hover:bg-[#232B39]">
-
+          <div className="flex items-center gap-2">
+            <Circle
+              size={8}
+              className="fill-green-400 text-green-400"
+            />
+            <span className="text-sm font-medium text-green-400">
+              Offline Ready
+            </span>
+          </div>
           <h3 className="mt-4 font-medium text-white">
             {userName}
           </h3>
-
           <p className="text-sm text-zinc-500">
             {deviceName}
           </p>
-
         </div>
-
       </footer>
-
-    </aside>
+      </aside>
+    </div>
   );
 }

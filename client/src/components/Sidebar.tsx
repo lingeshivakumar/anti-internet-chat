@@ -1,99 +1,157 @@
-export default function Sidebar() {
-    return (
-        <aside className="flex w-[290px] flex-col rounded-[28px] border border-white/5 bg-zinc-900 shadow-2xl">
+import {
+  MessageCircleMore,
+  Search,
+  Circle,
+} from "lucide-react";
 
-            {/* Header */}
+function getGreeting() {
+  const hour = new Date().getHours();
 
-            <div className="px-6 pt-6">
+  if (hour < 12) return "Good Morning";
+  if (hour < 18) return "Good Afternoon";
 
-                <h1 className="text-xs font-bold tracking-[0.28em] text-white uppercase">
-                    Anti-Internet Chat
-                </h1>
+  return "Good Evening";
+}
 
-                <p className="mt-2 text-sm text-zinc-400">
-                    Offline • Secure • Peer-to-Peer
-                </p>
+interface SidebarProps {
+  userName: string;
+  deviceName: string;
+}
 
-            </div>
+export default function Sidebar({
+  userName,
+  deviceName,
+}: SidebarProps) {
+  return (
+    <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#11161D]">
 
-            {/* Search */}
+      {/* Ambient Glow */}
 
-            <div className="px-6 pt-6">
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-24
+          -top-24
+          h-72
+          w-72
+          rounded-full
+          bg-blue-500/10
+          blur-3xl
+        "
+      />
 
-                <input
-                    type="text"
-                    placeholder="Search conversations..."
-                    className="
-                        h-12
-                        w-full
-                        rounded-2xl
-                        border
-                        border-white/5
-                        bg-zinc-800
-                        px-4
-                        text-sm
-                        text-white
-                        placeholder:text-zinc-500
-                        outline-none
-                        transition
-                        focus:border-blue-500
-                    "
-                />
+      {/* Header */}
 
-            </div>
+      <header className="relative px-8 pt-8">
 
-            {/* Conversation Area */}
+        <p className="text-sm text-zinc-500">
+          {getGreeting()}
+        </p>
 
-            <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">
+          {userName}
+        </h1>
 
-                <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-zinc-800 text-4xl">
+      </header>
 
-                    💬
+      {/* Search */}
 
-                </div>
+      <div className="relative px-8 pt-8">
 
-                <h2 className="text-lg font-semibold text-white">
+        <div
+          className="
+            flex
+            h-12
+            items-center
+            gap-3
+            rounded-2xl
+            bg-[#1A202B]
+            px-4
 
-                    No conversations yet
+            transition-all
+            duration-300
 
-                </h2>
+            focus-within:scale-[1.02]
+            focus-within:bg-[#222938]
+          "
+        >
 
-                <p className="mt-3 text-sm leading-6 text-zinc-400">
+          <Search
+            size={18}
+            className="text-zinc-500"
+          />
 
-                    Discover nearby devices to begin chatting securely.
+          <input
+            placeholder="Search convos..."
+            className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
+          />
 
-                </p>
+        </div>
 
-            </div>
+      </div>
 
-            {/* Footer */}
+      {/* Section Title */}
 
-            <footer className="flex items-center gap-4 border-t border-white/5 p-6">
+      <div className="relative px-8 pt-8">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-violet-500 font-semibold text-white">
+        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+          Conversations
+        </p>
 
-                    L
+      </div>
 
-                </div>
+      {/* Empty State */}
 
-                <div>
+      <div className="relative -mt-10 flex flex-1 flex-col items-center justify-center px-8">
 
-                    <p className="font-medium text-white">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1A202B]">
 
-                        Lingesh
+          <MessageCircleMore
+            size={34}
+            className="text-zinc-500"
+          />
 
-                    </p>
+        </div>
 
-                    <p className="text-sm text-zinc-400">
+        <h2 className="mt-6 text-lg font-semibold text-white">
+          No conversations
+        </h2>
 
-                        This Device
+        <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-zinc-500">
+          Nearby devices will appear here once discovered.
+        </p>
 
-                    </p>
+      </div>
 
-                </div>
+      {/* Footer */}
 
-            </footer>
+      <footer className="relative px-5 pb-5 pt-4">
 
-        </aside>
-    );
+        <div
+          className="
+            rounded-2xl
+            bg-[#1A202B]
+            p-4
+
+            transition-all
+            duration-300
+
+            hover:-translate-y-1
+            hover:bg-[#232B39]">
+
+          <h3 className="mt-4 font-medium text-white">
+            {userName}
+          </h3>
+
+          <p className="text-sm text-zinc-500">
+            {deviceName}
+          </p>
+
+        </div>
+
+      </footer>
+
+    </aside>
+  );
 }

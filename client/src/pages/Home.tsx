@@ -1,15 +1,16 @@
 import Sidebar from "../components/Sidebar";
 
 export default function Home() {
-    return (
-        <main className="min-h-screen bg-zinc-950 p-5">
-            <div className="flex h-[calc(100vh-40px)] gap-5">
+  return (
+    <main className="min-h-screen bg-[#0A0C10] p-5">
+      <div className="grid h-[calc(100vh-40px)] grid-cols-[290px_1fr] gap-5">
+        <Sidebar
+          userName="Lingesh"
+          deviceName="MacBook Air M2"
+        />
 
-                <Sidebar />
-
-                <section className="flex-1 rounded-[28px] border border-white/5 bg-zinc-900 shadow-2xl" />
-
-            </div>
-        </main>
-    );
+        <section className="rounded-[30px] bg-[#13161D]" />
+      </div>
+    </main>
+  );
 }

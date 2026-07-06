@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+:root {
+  --background: #090b10;
+  --surface: #11161f;
+  --surface-2: #181f2b;
+  --border: rgba(255,255,255,0.06);
+
+  --text: #f5f7fa;
+  --text-secondary: #98a2b3;
+
+  --accent: #5a8dff;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3445;
+  border-radius: 999px;
+}

@@ -28,14 +28,14 @@ export default function Sidebar({
         style={{
           right: "-40px",
           background:
-            "radial-gradient(circle at right center, #818cf8 0%, #6366f1 28%, #7c3aed 52%, transparent 72%)",
+            "radial-gradient(circle at right center, red 0%, red 28%, red 52%, transparent 10%)",
         }}
       />
 
-      <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#11161D]">
+      <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#ef4444]/15">
       {/* Header */}
       <header className="relative px-8 pt-8">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-white-500">
           {getGreeting()}
         </p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">
@@ -73,7 +73,7 @@ export default function Sidebar({
 
       {/* Section Title */}
       <div className="relative px-8 pt-8">
-        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs uppercase tracking-[0.2em] text-white-500">
           Conversations
         </p>
       </div>
@@ -89,7 +89,7 @@ export default function Sidebar({
         <h2 className="mt-6 text-lg font-semibold text-white">
           No conversations
         </h2>
-        <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-zinc-500">
+        <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-white-500">
           Nearby devices will appear here once discovered.
         </p>
       </div>
@@ -108,10 +108,10 @@ export default function Sidebar({
           <div className="flex items-center gap-2">
             <Circle
               size={8}
-              className="fill-green-400 text-green-400"
+              className="fill-red-400 text-red-400"
             />
-            <span className="text-sm font-medium text-green-400">
-              Offline Ready
+            <span className="text-sm font-medium text-red-400">
+              Offline
             </span>
           </div>
           <h3 className="mt-4 font-medium text-white">

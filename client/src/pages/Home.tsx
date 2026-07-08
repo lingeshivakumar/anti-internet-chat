@@ -1,4 +1,5 @@
 import Sidebar from "../components/Sidebar";
+import ChatWindow from "../components/ChatWindow";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
           deviceName="MacBook Air M2"
         />
 
-        <section className="rounded-[30px] bg-[#13161D]" />
+        <ChatWindow />
       </div>
     </main>
   );

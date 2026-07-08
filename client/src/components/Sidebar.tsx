@@ -24,11 +24,11 @@ export default function Sidebar({
     <div className="relative h-full">
       {/* Ambient Glow — radiates from behind the card, spilling to the left */}
       <div
-        className="pointer-events-none absolute top-1/2 h-[700px] w-[560px] -translate-y-1/2 opacity-90 blur-[110px]"
+        className="pointer-events-none absolute top-1/2 h-[740px] w-[900px] -translate-y-1/2 opacity-70 blur-[170px]"
         style={{
           right: "-40px",
           background:
-            "radial-gradient(circle at right center, red 0%, red 28%, red 52%, transparent 10%)",
+            "radial-gradient(circle at right center, red 0%, red 28%, red 52%, transparent 20%)",
         }}
       />
 

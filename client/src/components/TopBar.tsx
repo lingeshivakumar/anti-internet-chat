@@ -46,7 +46,7 @@ export default function TopBar() {
               text-white
             "
           >
-            No Device Connected
+            No Devices Found
           </h2>
 
           <p

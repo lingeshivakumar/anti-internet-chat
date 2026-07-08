@@ -7,7 +7,7 @@ export default function Home() {
       <div className="grid h-[calc(100vh-40px)] grid-cols-[290px_1fr] gap-5">
         <Sidebar
           userName="User"
-          deviceName="Your devices"
+          deviceName="Your device"
         />
 
         <ChatWindow />

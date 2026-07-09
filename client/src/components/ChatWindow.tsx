@@ -1,4 +1,5 @@
 import TopBar from "./TopBar";
+
 export default function ChatWindow() {
   return (
     <section
@@ -6,39 +7,48 @@ export default function ChatWindow() {
         relative
         flex
         h-full
+        w-full
         flex-col
         overflow-hidden
-        rounded-[30px]
-        border
+        rounded-none
+        md:rounded-[30px]
+        border-x-0
+        border-y
+        md:border
         border-white/5
         bg-[#11161D]/60
         backdrop-blur-xl
         shadow-[0_20px_60px_rgba(0,0,0,0.45)]
       "
     >
-      {/* Neon Leak — outer wash */}
+      {/* Neon Leak — scaled down on mobile devices */}
       <div
         className="
           pointer-events-none
           absolute
-          -right-50
-          -top-32
+          -right-20
+          -top-20
+          md:-right-50
+          md:-top-32
           z-0
-          h-[760px]
-          w-[860px]
+          h-[400px]
+          w-[400px]
+          md:h-[760px]
+          md:w-[860px]
           rounded-full
-          bg-[radial-gradient(circle_at_center,_rgba(56,132,255,0.28)_0%,_rgba(56,132,255,0.10)_40%,_transparent_72%)]
-          blur-3xl
+          bg-[radial-gradient(circle_at_center,_rgba(56,132,255,0.25)_0%,_rgba(56,132,255,0.08)_40%,_transparent_72%)]
+          blur-2xl
+          md:blur-3xl
         "
       />
-
 
       {/* Inner Highlight along the top edge */}
       <div
         className="
           pointer-events-none
           absolute
-          inset-x-8
+          inset-x-4
+          md:inset-x-8
           top-0
           z-10
           h-px
@@ -50,15 +60,15 @@ export default function ChatWindow() {
       />
 
       {/* Top Bar Area */}
-        <div
+      <div
         className="
-            relative
-            z-10
-            shadow-[0_8px_30px_rgba(0,0,0,0.18)]
+          relative
+          z-10
+          shadow-[0_8px_30px_rgba(0,0,0,0.18)]
         "
-        >
+      >
         <TopBar />
-        </div>
+      </div>
 
       {/* Messages Scroll Area */}
       <div
@@ -100,17 +110,17 @@ export default function ChatWindow() {
         />
       </div>
 
-      {/* Message Input Area */}
+      {/* Message Input Area — smaller height on mobile */}
       <div
         className="
           relative
           z-10
-          h-[92px]
+          h-[72px]
+          md:h-[92px]
           border-t
           border-white/5
         "
       />
-
     </section>
   );
 }

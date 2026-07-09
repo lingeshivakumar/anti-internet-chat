@@ -80,7 +80,7 @@ export default function MessageInput({
         flex-1
         items-center
         gap-2
-        rounded-2xl
+        rounded-full
         
         /* Apple Glass Effect (Material) */
         bg-white/[0.04]

@@ -10,21 +10,24 @@ export default function TopBar() {
       className="
         relative
         flex
-        h-[72px]
+        h-[64px]
+        md:h-[72px]
         items-center
         justify-between
-        px-8
+        px-4
+        md:px-8
       "
     >
       {/* Left */}
-
-      <div className="flex items-center gap-4">
-
+      <div className="flex items-center gap-3 md:gap-4 min-w-0">
         <div
           className="
             flex
-            h-11
-            w-11
+            h-9
+            w-9
+            md:h-11
+            md:w-11
+            shrink-0
             items-center
             justify-center
             rounded-full
@@ -32,49 +35,51 @@ export default function TopBar() {
           "
         >
           <BluetoothSearching
-            size={20}
+            size={18}
             className="text-red-400"
           />
         </div>
 
-        <div>
-
+        <div className="min-w-0">
           <h2
             className="
-              text-lg
+              text-base
+              md:text-lg
               font-semibold
               text-white
+              truncate
             "
           >
             No Devices Found
           </h2>
-
           <p
             className="
-              text-sm
+              text-xs
+              md:text-sm
               text-zinc-500
+              truncate
             "
           >
             Discover nearby devices
           </p>
-
         </div>
-
       </div>
 
       {/* Right */}
-
       <div
         className="
           flex
           items-center
-          gap-3
+          gap-2
+          md:gap-3
+          shrink-0
         "
       >
-
+        {/* Hidden on mobile to prevent text layout overlapping */}
         <div
           className="
-            flex
+            hidden
+            sm:flex
             items-center
             gap-2
             rounded-full
@@ -83,12 +88,10 @@ export default function TopBar() {
             py-2
           "
         >
-
           <ShieldCheck
             size={16}
             className="text-emerald-400"
           />
-
           <span
             className="
               text-sm
@@ -97,22 +100,21 @@ export default function TopBar() {
           >
             Encrypted
           </span>
-
         </div>
 
         <button
           className="
             flex
-            h-10
-            w-10
+            h-9
+            w-9
+            md:h-10
+            md:w-10
             items-center
             justify-center
             rounded-full
             bg-[#1A202B]
-
             transition-all
             duration-300
-
             hover:bg-[#232B39]
             hover:rotate-90
           "
@@ -122,7 +124,6 @@ export default function TopBar() {
             className="text-zinc-400"
           />
         </button>
-
       </div>
     </header>
   );

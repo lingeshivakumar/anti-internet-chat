@@ -1,4 +1,5 @@
 import TopBar from "./TopBar";
+import MessageInput from "./MessageInput";
 
 export default function ChatWindow() {
   return (
@@ -26,13 +27,13 @@ export default function ChatWindow() {
         className="
           pointer-events-none
           absolute
-          -right-20
+          -right-10
           -top-20
           md:-right-50
           md:-top-32
           z-0
-          h-[400px]
-          w-[400px]
+          h-[800px]
+          w-[900px]
           md:h-[760px]
           md:w-[860px]
           rounded-full
@@ -119,8 +120,17 @@ export default function ChatWindow() {
           md:h-[92px]
           border-t
           border-white/5
+          flex
+          items-center
+          px-4
+          md:px-6
         "
-      />
+      >
+        {/* Renders your custom input file layout while satisfying required attributes */}
+        <div className="w-full">
+          <MessageInput onSend={(text) => console.log(text)} disabled={false} />
+        </div>
+      </div>
     </section>
   );
 }

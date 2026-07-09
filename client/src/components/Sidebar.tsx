@@ -1,7 +1,10 @@
+import { useState } from "react";
 import {
   MessageCircleMore,
   Search,
   Circle,
+  Menu,
+  X,
 } from "lucide-react";
 
 function getGreeting() {
@@ -20,11 +23,28 @@ export default function Sidebar({
   userName,
   deviceName,
 }: SidebarProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="relative h-full">
-      {/* Ambient Glow — radiates from behind the card, spilling to the left */}
+    <div className="relative h-full w-full lg:w-auto">
+      {/* Mobile Header Bar — visible only on screens smaller than desktop (lg) */}
+      <div className="flex items-center justify-between bg-[#1A202B] px-6 py-4 lg:hidden">
+        <div className="flex items-center gap-2">
+          <Circle size={8} className="fill-red-400 text-red-400" />
+          <span className="text-sm font-medium text-white">{userName}</span>
+        </div>
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="rounded-lg p-2 text-white hover:bg-zinc-800 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Ambient Glow — scaled down slightly on mobile to avoid layout breaking */}
       <div
-        className="pointer-events-none absolute top-1/2 h-[740px] w-[900px] -translate-y-1/2 opacity-70 blur-[170px]"
+        className="pointer-events-none absolute top-1/2 h-[400px] w-[300px] md:h-[740px] md:w-[900px] -translate-y-1/2 opacity-70 blur-[100px] md:blur-[170px]"
         style={{
           right: "-40px",
           background:
@@ -32,96 +52,112 @@ export default function Sidebar({
         }}
       />
 
-      <aside className="relative flex h-full flex-col overflow-hidden rounded-[30px] bg-[#ef4444]/15">
-      {/* Header */}
-      <header className="relative px-8 pt-8">
-        <p className="text-sm text-white-500">
-          {getGreeting()}
-        </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">
-          {userName}
-        </h1>
-      </header>
-
-      {/* Search */}
-      <div className="relative px-8 pt-8">
-        <div
-          className="
-            flex
-            h-12
-            items-center
-            gap-3
-            rounded-2xl
-            bg-[#1A202B]
-            px-4
-            transition-all
-            duration-300
-            focus-within:scale-[1.02]
-            focus-within:bg-[#222938]
-          "
-        >
-          <Search
-            size={18}
-            className="text-zinc-500"
-          />
-          <input
-            placeholder="Search conversations..."
-            className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
-          />
-        </div>
-      </div>
-
-      {/* Section Title */}
-      <div className="relative px-8 pt-8">
-        <p className="text-xs uppercase tracking-[0.2em] text-white-500">
-          Conversations
-        </p>
-      </div>
-
-      {/* Empty State */}
-      <div className="relative -mt-10 flex flex-1 flex-col items-center justify-center px-8">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1A202B]">
-          <MessageCircleMore
-            size={34}
-            className="text-zinc-500"
-          />
-        </div>
-        <h2 className="mt-6 text-lg font-semibold text-white">
-          No conversations
-        </h2>
-        <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-white-500">
-          Nearby devices will appear here once discovered.
-        </p>
-      </div>
-
-      {/* Footer */}
-      <footer className="relative px-5 pb-5 pt-4">
-        <div
-          className="
-            rounded-2xl
-            bg-[#1A202B]
-            p-4
-            transition-all
-            duration-300
-            hover:-translate-y-1
-            hover:bg-[#232B39]">
-          <div className="flex items-center gap-2">
-            <Circle
-              size={8}
-              className="fill-red-400 text-red-400"
-            />
-            <span className="text-sm font-medium text-red-400">
-              Offline
-            </span>
-          </div>
-          <h3 className="mt-4 font-medium text-white">
+      {/* Main Sidebar Wrapper */}
+      <aside 
+        className={`
+          ${isOpen ? "flex" : "hidden"} 
+          lg:flex 
+          fixed lg:relative 
+          inset-x-0 bottom-0 top-[64px] lg:top-0 
+          z-50 lg:z-auto 
+          h-[calc(100vh-64px)] lg:h-full 
+          w-full flex-col overflow-y-auto lg:overflow-hidden 
+          rounded-none lg:rounded-[30px] 
+          bg-[#111622] lg:bg-[#ef4444]/15
+          backdrop-blur-md lg:backdrop-blur-none
+          transition-all duration-300
+        `}
+      >
+        {/* Header */}
+        <header className="relative px-6 pt-6 lg:px-8 lg:pt-8">
+          <p className="text-sm text-zinc-400">
+            {getGreeting()}
+          </p>
+          <h1 className="mt-1 text-2xl lg:text-3xl font-semibold tracking-tight text-white">
             {userName}
-          </h3>
-          <p className="text-sm text-zinc-500">
-            {deviceName}
+          </h1>
+        </header>
+
+        {/* Search */}
+        <div className="relative px-6 pt-6 lg:px-8 lg:pt-8">
+          <div
+            className="
+              flex
+              h-12
+              items-center
+              gap-3
+              rounded-2xl
+              bg-[#1A202B]
+              px-4
+              transition-all
+              duration-300
+              focus-within:scale-[1.02]
+              focus-within:bg-[#222938]
+            "
+          >
+            <Search
+              size={18}
+              className="text-zinc-500"
+            />
+            <input
+              placeholder="Search conversations..."
+              className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Section Title */}
+        <div className="relative px-6 pt-6 lg:px-8 lg:pt-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Conversations
           </p>
         </div>
-      </footer>
+
+        {/* Empty State */}
+        <div className="relative my-auto flex flex-col items-center justify-center px-6 py-12 lg:px-8 lg:py-0">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1A202B]">
+            <MessageCircleMore
+              size={34}
+              className="text-zinc-500"
+            />
+          </div>
+          <h2 className="mt-6 text-lg font-semibold text-white">
+            No conversations
+          </h2>
+          <p className="mt-3 max-w-[190px] text-center text-sm leading-6 text-zinc-400">
+            Nearby devices will appear here once discovered.
+          </p>
+        </div>
+
+        {/* Footer */}
+        <footer className="relative px-5 pb-5 pt-4 mt-auto">
+          <div
+            className="
+              rounded-2xl
+              bg-[#1A202B]
+              p-4
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:bg-[#232B39]"
+          >
+            <div className="flex items-center gap-2">
+              <Circle
+                size={8}
+                className="fill-red-400 text-red-400"
+              />
+              <span className="text-sm font-medium text-red-400">
+                Offline
+              </span>
+            </div>
+            <h3 className="mt-4 font-medium text-white">
+              {userName}
+            </h3>
+            <p className="text-sm text-zinc-500">
+              {deviceName}
+            </p>
+          </div>
+        </footer>
       </aside>
     </div>
   );

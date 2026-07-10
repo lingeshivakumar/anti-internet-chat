@@ -26,9 +26,11 @@ export default function Sidebar({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative h-full w-full lg:w-auto">
-      {/* Mobile Header Bar — visible only on screens smaller than desktop (lg) */}
-      <div className="flex items-center justify-between bg-[#1A202B] px-6 py-4 lg:hidden">
+    // CHANGE 1: Outer container is h-auto on mobile so it collapses completely when closed
+    <div className="relative h-auto lg:h-full w-full lg:w-auto">
+      
+      {/* Mobile Header Bar — Fixed height, acts as the persistent top nav on mobile */}
+      <div className="flex h-16 items-center justify-between bg-[#1A202B] px-6 lg:hidden">
         <div className="flex items-center gap-2">
           <Circle size={8} className="fill-red-400 text-red-400" />
           <span className="text-sm font-medium text-white">{userName}</span>
@@ -42,7 +44,7 @@ export default function Sidebar({
         </button>
       </div>
 
-      {/* Ambient Glow — scaled down slightly on mobile to avoid layout breaking */}
+      {/* Ambient Glow */}
       <div
         className="pointer-events-none absolute top-1/2 h-[400px] w-[300px] md:h-[740px] md:w-[900px] -translate-y-1/2 opacity-70 blur-[100px] md:blur-[170px]"
         style={{
@@ -58,7 +60,7 @@ export default function Sidebar({
           ${isOpen ? "flex" : "hidden"} 
           lg:flex 
           fixed lg:relative 
-          inset-x-0 bottom-0 top-[64px] lg:top-0 
+          inset-x-0 bottom-0 top-16 lg:top-0 
           z-50 lg:z-auto 
           h-[calc(100vh-64px)] lg:h-full 
           w-full flex-col overflow-y-auto lg:overflow-hidden 

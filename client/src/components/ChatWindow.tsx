@@ -12,34 +12,33 @@ export default function ChatWindow() {
         flex-col
         overflow-hidden
         rounded-none
-        md:rounded-[30px]
-        border-x-0
-        border-y
-        md:border
-        border-white/5
+        lg:rounded-[30px]
+        border-none
+        lg:border
+        lg:border-white/5
         bg-[#11161D]/60
         backdrop-blur-xl
         shadow-[0_20px_60px_rgba(0,0,0,0.45)]
       "
     >
-      {/* Neon Leak — scaled down on mobile devices */}
+      {/* Neon Leak */}
       <div
         className="
           pointer-events-none
           absolute
           -right-10
           -top-20
-          md:-right-50
-          md:-top-32
+          lg:-right-50
+          lg:-top-32
           z-0
           h-[800px]
           w-[900px]
-          md:h-[760px]
-          md:w-[860px]
+          lg:h-[760px]
+          lg:w-[860px]
           rounded-full
           bg-[radial-gradient(circle_at_center,_rgba(56,132,255,0.25)_0%,_rgba(56,132,255,0.08)_40%,_transparent_72%)]
           blur-2xl
-          md:blur-3xl
+          lg:blur-3xl
         "
       />
 
@@ -49,7 +48,7 @@ export default function ChatWindow() {
           pointer-events-none
           absolute
           inset-x-4
-          md:inset-x-8
+          lg:inset-x-8
           top-0
           z-10
           h-px
@@ -111,22 +110,21 @@ export default function ChatWindow() {
         />
       </div>
 
-      {/* Message Input Area — smaller height on mobile */}
+      {/* Message Input Area */}
       <div
         className="
           relative
           z-10
           h-[72px]
-          md:h-[92px]
+          lg:h-[92px]
           border-t
           border-white/5
           flex
           items-center
           px-4
-          md:px-6
+          lg:px-6
         "
       >
-        {/* Renders your custom input file layout while satisfying required attributes */}
         <div className="w-full">
           <MessageInput onSend={(text) => console.log(text)} disabled={false} />
         </div>

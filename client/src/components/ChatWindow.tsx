@@ -17,7 +17,7 @@ export default function ChatWindow() {
         lg:border
         lg:border-white/5
         bg-[#11161D]/60
-        backdrop-blur-xl
+        backdrop-blur-2xl
         shadow-[0_20px_60px_rgba(0,0,0,0.45)]
       "
     >
@@ -33,10 +33,10 @@ export default function ChatWindow() {
           z-0
           h-[800px]
           w-[900px]
-          lg:h-[760px]
+          lg:h-[790px]
           lg:w-[860px]
           rounded-full
-          bg-[radial-gradient(circle_at_center,_rgba(56,132,255,0.25)_0%,_rgba(56,132,255,0.08)_40%,_transparent_72%)]
+          bg-[radial-gradient(circle_at_center,_rgba(56,100,255,0.25)_0%,_rgba(56,132,255,0.08)_40%,_transparent_72%)]
           blur-2xl
           lg:blur-3xl
         "

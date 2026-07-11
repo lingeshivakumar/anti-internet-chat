@@ -82,7 +82,8 @@ export default function Sidebar({
 
         {/* Search Bar with Apple Glass Effect */}
         <div className="relative px-6 pt-6 lg:px-8 lg:pt-8 w-full">
-          <div className="flex h-12 w-full items-center gap-3 rounded-xl bg-white/10 px-4 border border-white/20 backdrop-blur-md shadow-lg transition-all duration-300 focus-within:scale-[1.02] focus-within:bg-white/15">
+          {/* CHANGED: updated radius to rounded-[22px] to complement the outer 30px container */}
+          <div className="flex h-12 w-full items-center gap-3 rounded-[22px] bg-white/10 px-5 border border-white/20 backdrop-blur-md shadow-lg transition-all duration-300 focus-within:scale-[1.02] focus-within:bg-white/15">
             <Search
               size={18}
               className="text-zinc-300"
@@ -119,11 +120,12 @@ export default function Sidebar({
 
         {/* Footer */}
         <footer className="relative px-5 pb-5 pt-4 mt-auto">
+            {/* CHANGED: updated radius to rounded-[22px] to match internal alignment logic */}
             <div
               className="
-                rounded-2xl
+                rounded-[22px]
                 bg-white/10
-                p-4
+                p-5
                 border 
                 border-white/20 
                 backdrop-blur-md 

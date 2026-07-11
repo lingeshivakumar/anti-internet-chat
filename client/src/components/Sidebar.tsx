@@ -26,7 +26,7 @@ export default function Sidebar({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    // CHANGE 1: Outer container is h-auto on mobile so it collapses completely when closed
+    // Outer container is h-auto on mobile so it collapses completely when closed
     <div className="relative h-auto lg:h-full w-full lg:w-auto">
       
       {/* Mobile Header Bar — Fixed height, acts as the persistent top nav on mobile */}
@@ -80,30 +80,16 @@ export default function Sidebar({
           </h1>
         </header>
 
-        {/* Search */}
-        <div className="relative px-6 pt-6 lg:px-8 lg:pt-8">
-          <div
-            className="
-              flex
-              h-12
-              items-center
-              gap-3
-              rounded-2xl
-              bg-[#1A202B]
-              px-4
-              transition-all
-              duration-300
-              focus-within:scale-[1.02]
-              focus-within:bg-[#222938]
-            "
-          >
+        {/* Search Bar with Apple Glass Effect */}
+        <div className="relative px-6 pt-6 lg:px-8 lg:pt-8 w-full">
+          <div className="flex h-12 w-full items-center gap-3 rounded-xl bg-white/10 px-4 border border-white/20 backdrop-blur-md shadow-lg transition-all duration-300 focus-within:scale-[1.02] focus-within:bg-white/15">
             <Search
               size={18}
-              className="text-zinc-500"
+              className="text-zinc-300"
             />
-            <input
-              placeholder="Search conversations..."
-              className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
+            <input 
+              placeholder="Search conversations..." 
+              className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-400 outline-none w-full" 
             />
           </div>
         </div>
@@ -133,33 +119,38 @@ export default function Sidebar({
 
         {/* Footer */}
         <footer className="relative px-5 pb-5 pt-4 mt-auto">
-          <div
-            className="
-              rounded-2xl
-              bg-[#1A202B]
-              p-4
-              transition-all
-              duration-300
-              hover:-translate-y-1
-              hover:bg-[#232B39]"
-          >
-            <div className="flex items-center gap-2">
-              <Circle
-                size={8}
-                className="fill-red-400 text-red-400"
-              />
-              <span className="text-sm font-medium text-red-400">
-                Offline
-              </span>
+            <div
+              className="
+                rounded-2xl
+                bg-white/10
+                p-4
+                border 
+                border-white/20 
+                backdrop-blur-md 
+                shadow-lg
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:bg-white/15"
+            >
+              <div className="flex items-center gap-2">
+                <Circle
+                  size={8}
+                  className="fill-red-400 text-red-400"
+                />
+                <span className="text-sm font-medium text-red-400">
+                  Offline
+                </span>
+              </div>
+              <h3 className="mt-4 font-medium text-white">
+                {userName}
+              </h3>
+              <p className="text-sm text-zinc-300">
+                {deviceName}
+              </p>
             </div>
-            <h3 className="mt-4 font-medium text-white">
-              {userName}
-            </h3>
-            <p className="text-sm text-zinc-500">
-              {deviceName}
-            </p>
-          </div>
-        </footer>
+          </footer>
+
       </aside>
     </div>
   );

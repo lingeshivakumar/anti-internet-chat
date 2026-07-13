@@ -46,11 +46,11 @@ export default function Sidebar({
 
       {/* Ambient Glow */}
       <div
-        className="pointer-events-none absolute top-1/2 h-[400px] w-[300px] md:h-[740px] md:w-[900px] -translate-y-1/2 opacity-70 blur-[100px] md:blur-[170px]"
+        className="pointer-events-none absolute top-1/2 h-[400px] w-[300px] md:h-[740px] md:w-[900px] -translate-y-1/2 opacity-60 blur-[80px] md:blur-[170px]"
         style={{
           right: "-40px",
           background:
-            "radial-gradient(circle at right center, red 0%, red 28%, red 52%, transparent 20%)",
+            "radial-gradient(circle at right center, red 0%, red 70%, red 52%, transparent 20%)",
         }}
       />
 

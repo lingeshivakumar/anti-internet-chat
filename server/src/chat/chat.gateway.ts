@@ -16,7 +16,6 @@ import { SendMessageDto } from './dto/send-message.dto';
   },
 })
 export class ChatGateway {
-
   constructor(
     private readonly chatService: ChatService,
   ) {}
@@ -25,10 +24,9 @@ export class ChatGateway {
   server: Server;
 
   @SubscribeMessage('send-message')
-  handleMessage(
+  handleSendMessage(
     @MessageBody() data: SendMessageDto,
   ) {
-
     const message =
       this.chatService.createMessage(data);
 
@@ -36,8 +34,5 @@ export class ChatGateway {
       'receive-message',
       message,
     );
-
-    return message;
   }
-
 }

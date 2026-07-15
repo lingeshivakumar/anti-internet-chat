@@ -1,22 +1,29 @@
 import { Check, CheckCheck } from "lucide-react";
 
+import type { ChatMessage } from "../services/chat.service";
+
 export type MessageStatus = "sent" | "delivered" | "read";
 
 interface MessageProps {
-  text: string;
-  timestamp: string;
-  isOwn: boolean;
+  message: ChatMessage;
+  currentUserId?: string;
   status?: MessageStatus;
-  senderName?: string;
 }
 
 export default function Message({
-  text,
-  timestamp,
-  isOwn,
+  message,
+  currentUserId = "user-1",
   status = "sent",
-  senderName,
 }: MessageProps) {
+  const isOwn = message.senderId === currentUserId;
+
+  const timestamp = new Date(
+    message.timestamp,
+  ).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <div
       className={`
@@ -29,9 +36,10 @@ export default function Message({
       `}
     >
       <div className="flex max-w-[78%] md:max-w-[65%] flex-col gap-1">
-        {!isOwn && senderName && (
+
+        {!isOwn && (
           <span className="px-1 text-xs font-medium text-zinc-500">
-            {senderName}
+            {message.senderName}
           </span>
         )}
 
@@ -53,7 +61,9 @@ export default function Message({
             }
           `}
         >
-          <p className="whitespace-pre-wrap break-words">{text}</p>
+          <p className="whitespace-pre-wrap break-words">
+            {message.content}
+          </p>
         </div>
 
         <div
@@ -65,16 +75,29 @@ export default function Message({
             ${isOwn ? "justify-end" : "justify-start"}
           `}
         >
-          <span className="text-[11px] text-zinc-500">{timestamp}</span>
+          <span className="text-[11px] text-zinc-500">
+            {timestamp}
+          </span>
+
           {isOwn &&
             (status === "read" ? (
-              <CheckCheck size={13} className="text-[#3884FF]" />
+              <CheckCheck
+                size={13}
+                className="text-[#3884FF]"
+              />
             ) : status === "delivered" ? (
-              <CheckCheck size={13} className="text-zinc-500" />
+              <CheckCheck
+                size={13}
+                className="text-zinc-500"
+              />
             ) : (
-              <Check size={13} className="text-zinc-500" />
+              <Check
+                size={13}
+                className="text-zinc-500"
+              />
             ))}
         </div>
+
       </div>
     </div>
   );

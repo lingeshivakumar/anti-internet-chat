@@ -1,7 +1,38 @@
+import { useEffect, useState } from "react";
+
 import TopBar from "./TopBar";
+import Message from "./Message";
 import MessageInput from "./MessageInput";
 
+import {
+  chatService,
+  type ChatMessage,
+} from "../services/chat.service";
+
 export default function ChatWindow() {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+  useEffect(() => {
+    const handleMessage = (message: ChatMessage) => {
+      setMessages((previous) => [...previous, message]);
+    };
+
+    chatService.onMessage(handleMessage);
+
+    return () => {
+      chatService.offMessage(handleMessage);
+    };
+  }, []);
+
+  const handleSend = (content: string) => {
+    chatService.sendMessage({
+      roomId: "global",
+      senderId: "user-1",
+      senderName: "Lingesh",
+      content,
+    });
+  };
+
   return (
     <section
       className="
@@ -22,6 +53,7 @@ export default function ChatWindow() {
       "
     >
       {/* Neon Leak */}
+
       <div
         className="
           pointer-events-none
@@ -42,7 +74,8 @@ export default function ChatWindow() {
         "
       />
 
-      {/* Inner Highlight along the top edge */}
+      {/* Inner Highlight */}
+
       <div
         className="
           pointer-events-none
@@ -59,7 +92,8 @@ export default function ChatWindow() {
         "
       />
 
-      {/* Top Bar Area */}
+      {/* Top Bar */}
+
       <div
         className="
           relative
@@ -70,16 +104,20 @@ export default function ChatWindow() {
         <TopBar />
       </div>
 
-      {/* Messages Scroll Area */}
+      {/* Messages */}
+
       <div
         className="
           relative
           z-10
           flex-1
           overflow-y-auto
+          px-6
+          py-6
         "
       >
         {/* Top Fade */}
+
         <div
           className="
             pointer-events-none
@@ -94,7 +132,17 @@ export default function ChatWindow() {
           "
         />
 
+        <div className="space-y-4">
+          {messages.map((message) => (
+            <Message
+              key={message.id}
+              message={message}
+            />
+          ))}
+        </div>
+
         {/* Bottom Fade */}
+
         <div
           className="
             pointer-events-none
@@ -110,7 +158,8 @@ export default function ChatWindow() {
         />
       </div>
 
-      {/* Message Input Area */}
+      {/* Message Input */}
+
       <div
         className="
           relative
@@ -126,7 +175,10 @@ export default function ChatWindow() {
         "
       >
         <div className="w-full">
-          <MessageInput onSend={(text) => console.log(text)} disabled={false} />
+          <MessageInput
+            onSend={handleSend}
+            disabled={false}
+          />
         </div>
       </div>
     </section>

@@ -1,21 +1,22 @@
 import { Check, CheckCheck } from "lucide-react";
 
 import type { ChatMessage } from "../services/chat.service";
+import { getIdentity } from "../services/identity.service";
 
 export type MessageStatus = "sent" | "delivered" | "read";
 
 interface MessageProps {
   message: ChatMessage;
-  currentUserId?: string;
   status?: MessageStatus;
 }
 
 export default function Message({
   message,
-  currentUserId = "user-1",
   status = "sent",
 }: MessageProps) {
-  const isOwn = message.senderId === currentUserId;
+  const currentUser = getIdentity();
+  const isOwn =
+  message.senderId === currentUser.id;
 
   const timestamp = new Date(
     message.timestamp,

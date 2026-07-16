@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getIdentity } from "../services/identity.service";
 
 import TopBar from "./TopBar";
 import Message from "./Message";
@@ -24,11 +25,13 @@ export default function ChatWindow() {
     };
   }, []);
 
+  const currentUser = getIdentity();
+
   const handleSend = (content: string) => {
     chatService.sendMessage({
       roomId: "global",
-      senderId: "user-1",
-      senderName: "Lingesh",
+      senderId: currentUser.id,
+      senderName: currentUser.name,
       content,
     });
   };

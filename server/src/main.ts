@@ -7,7 +7,7 @@ async function bootstrap() {
 app.enableCors({
   origin: [
     "http://localhost:5173",
-    "https://YOUR-FRONTEND.onrender.com",
+    "https://anti-internet-chat-1.onrender.com",
   ],
   credentials: true,
 });

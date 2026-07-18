@@ -1,6 +1,8 @@
 import {
   socket,
   registerUser,
+  onConnect,
+  offConnect,
 } from "./socket";
 
 export interface SendMessagePayload {
@@ -25,6 +27,14 @@ export interface ConnectedUser {
 }
 
 class ChatService {
+  onConnect(callback: () => void) {
+    onConnect(callback);
+  }
+
+  offConnect(callback: () => void) {
+    offConnect(callback);
+  }
+
   registerUser(username: string) {
     registerUser(username);
   }

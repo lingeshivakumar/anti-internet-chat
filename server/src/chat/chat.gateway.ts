@@ -43,24 +43,22 @@ export class ChatGateway
     console.log(`❌ Disconnected: ${client.id}`);
   }
 
-  @SubscribeMessage('register-user')
-  handleRegisterUser(
-    @ConnectedSocket()
-    client: Socket,
+@SubscribeMessage("register-user")
+handleRegisterUser(
+  @ConnectedSocket() client: Socket,
+  @MessageBody() username: string,
+) {
+  console.log("REGISTER:", username);
 
-    @MessageBody()
-    username: string,
-  ) {
-    this.chatService.addUser(
-      client.id,
-      username,
-    );
+  this.chatService.addUser(client.id, username);
 
-    this.server.emit(
-      'users-updated',
-      this.chatService.getUsers(),
-    );
-  }
+  console.log(this.chatService.getUsers());
+
+  this.server.emit(
+    "users-updated",
+    this.chatService.getUsers(),
+  );
+}
 
   @SubscribeMessage('send-message')
   handleSendMessage(

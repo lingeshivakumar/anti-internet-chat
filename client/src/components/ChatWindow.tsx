@@ -25,7 +25,11 @@ export default function ChatWindow() {
     chatService.onMessage(handleMessage);
 
     // Register this user with the server
-    chatService.registerUser(currentUser.name);
+    const handleConnect = () => {
+      chatService.registerUser(currentUser.name);
+    };
+
+    chatService.onConnect(handleConnect);
 
     // Listen for online user updates
     chatService.onUsersUpdated(setOnlineUsers);
@@ -33,6 +37,7 @@ export default function ChatWindow() {
     return () => {
       chatService.offMessage(handleMessage);
       chatService.offUsersUpdated(setOnlineUsers);
+      chatService.offConnect(handleConnect);
     };
   }, []);
 

@@ -12,6 +12,16 @@ socket.on("disconnect", () => {
   console.log("❌ Disconnected");
 });
 
+/* ---------- Connection ---------- */
+
+export function onConnect(callback: () => void) {
+  socket.on("connect", callback);
+}
+
+export function offConnect(callback: () => void) {
+  socket.off("connect", callback);
+}
+
 /* ---------- User Registration ---------- */
 
 export function registerUser(username: string) {

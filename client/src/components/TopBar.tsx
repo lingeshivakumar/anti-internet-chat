@@ -1,32 +1,37 @@
 import {
   ShieldCheck,
   MoreHorizontal,
-  BluetoothSearching,
+  Users,
 } from "lucide-react";
 
 export default function TopBar() {
+  // Temporary data
+  const onlineUsers = [
+    "User1",
+    "User2",
+    "User3",
+  ];
+
   return (
     <header
       className="
         relative
         flex
-        h-[64px]
-        md:h-[72px]
+        h-[72px]
         items-center
         justify-between
-        px-4
-        md:px-8
+        px-8
       "
     >
       {/* Left */}
-      <div className="flex items-center gap-3 md:gap-4 min-w-0">
+      <div className="flex min-w-0 items-center gap-4">
+
+        {/* Icon */}
         <div
           className="
             flex
-            h-9
-            w-9
-            md:h-11
-            md:w-11
+            h-11
+            w-11
             shrink-0
             items-center
             justify-center
@@ -34,48 +39,75 @@ export default function TopBar() {
             bg-[#1A202B]
           "
         >
-          <BluetoothSearching
+          <Users
             size={18}
-            className="text-red-400"
+            className="text-emerald-400"
           />
         </div>
 
+        {/* Title */}
         <div className="min-w-0">
+
           <h2
             className="
-              text-base
-              md:text-lg
+              text-lg
               font-semibold
               text-white
-              truncate
             "
           >
-            No Devices Found
+            Active Users ({onlineUsers.length})
           </h2>
-          <p
-            className="
-              text-xs
-              md:text-sm
-              text-zinc-500
-              truncate
-            "
-          >
-            Discover nearby devices
-          </p>
+
+          {/* User Pills */}
+          <div className="mt-2 flex items-center gap-2 overflow-x-auto scrollbar-hide">
+
+            {onlineUsers.map((user) => (
+              <div
+                key={user}
+                className="
+                  flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-[#1A202B]
+                  px-3
+                  py-1.5
+                  transition-all
+                  duration-300
+                  hover:bg-[#232B39]
+                "
+              >
+                <div className="h-2 w-2 rounded-full bg-emerald-400" />
+
+                <span
+                  className="
+                    whitespace-nowrap
+                    text-xs
+                    font-medium
+                    text-zinc-300
+                  "
+                >
+                  {user}
+                </span>
+              </div>
+            ))}
+
+          </div>
+
         </div>
+
       </div>
 
       {/* Right */}
       <div
         className="
           flex
-          items-center
-          gap-2
-          md:gap-3
           shrink-0
+          items-center
+          gap-3
         "
       >
-        {/* Hidden on mobile to prevent text layout overlapping */}
+        {/* Encryption Badge */}
         <div
           className="
             hidden
@@ -92,6 +124,7 @@ export default function TopBar() {
             size={16}
             className="text-emerald-400"
           />
+
           <span
             className="
               text-sm
@@ -102,21 +135,20 @@ export default function TopBar() {
           </span>
         </div>
 
+        {/* Menu */}
         <button
           className="
             flex
-            h-9
-            w-9
-            md:h-10
-            md:w-10
+            h-10
+            w-10
             items-center
             justify-center
             rounded-full
             bg-[#1A202B]
             transition-all
             duration-300
-            hover:bg-[#232B39]
             hover:rotate-90
+            hover:bg-[#232B39]
           "
         >
           <MoreHorizontal
@@ -124,7 +156,9 @@ export default function TopBar() {
             className="text-zinc-400"
           />
         </button>
+
       </div>
+
     </header>
   );
 }

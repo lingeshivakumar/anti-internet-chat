@@ -1,4 +1,7 @@
-import { socket } from "./socket";
+import {
+  socket,
+  registerUser,
+} from "./socket";
 
 export interface SendMessagePayload {
   roomId: string;
@@ -16,7 +19,16 @@ export interface ChatMessage {
   timestamp: number;
 }
 
+export interface ConnectedUser {
+  socketId: string;
+  username: string;
+}
+
 class ChatService {
+  registerUser(username: string) {
+    registerUser(username);
+  }
+
   sendMessage(message: SendMessagePayload) {
     socket.emit("send-message", message);
   }
@@ -27,6 +39,18 @@ class ChatService {
 
   offMessage(callback: (message: ChatMessage) => void) {
     socket.off("receive-message", callback);
+  }
+
+  onUsersUpdated(
+    callback: (users: ConnectedUser[]) => void,
+  ) {
+    socket.on("users-updated", callback);
+  }
+
+  offUsersUpdated(
+    callback: (users: ConnectedUser[]) => void,
+  ) {
+    socket.off("users-updated", callback);
   }
 }
 

@@ -4,14 +4,15 @@ import {
   Users,
 } from "lucide-react";
 
-export default function TopBar() {
-  // Temporary data
-  const onlineUsers = [
-    "User1",
-    "User2",
-    "User3",
-  ];
+import type { ConnectedUser } from "../services/chat.service";
 
+interface TopBarProps {
+  users?: ConnectedUser[];
+}
+
+export default function TopBar({
+  users = [],
+}: TopBarProps) {
   return (
     <header
       className="
@@ -25,7 +26,6 @@ export default function TopBar() {
     >
       {/* Left */}
       <div className="flex min-w-0 items-center gap-4">
-
         {/* Icon */}
         <div
           className="
@@ -47,7 +47,6 @@ export default function TopBar() {
 
         {/* Title */}
         <div className="min-w-0">
-
           <h2
             className="
               text-lg
@@ -55,47 +54,49 @@ export default function TopBar() {
               text-white
             "
           >
-            Active Users ({onlineUsers.length})
+            Active Users ({users.length})
           </h2>
 
           {/* User Pills */}
           <div className="mt-2 flex items-center gap-2 overflow-x-auto scrollbar-hide">
-
-            {onlineUsers.map((user) => (
-              <div
-                key={user}
-                className="
-                  flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  bg-[#1A202B]
-                  px-3
-                  py-1.5
-                  transition-all
-                  duration-300
-                  hover:bg-[#232B39]
-                "
-              >
-                <div className="h-2 w-2 rounded-full bg-emerald-400" />
-
-                <span
+            {users.length === 0 ? (
+              <span className="text-xs text-zinc-500">
+                No users online
+              </span>
+            ) : (
+              users.map((user) => (
+                <div
+                  key={user.socketId}
                   className="
-                    whitespace-nowrap
-                    text-xs
-                    font-medium
-                    text-zinc-300
+                    flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    bg-[#1A202B]
+                    px-3
+                    py-1.5
+                    transition-all
+                    duration-300
+                    hover:bg-[#232B39]
                   "
                 >
-                  {user}
-                </span>
-              </div>
-            ))}
+                  <div className="h-2 w-2 rounded-full bg-emerald-400" />
 
+                  <span
+                    className="
+                      whitespace-nowrap
+                      text-xs
+                      font-medium
+                      text-zinc-300
+                    "
+                  >
+                    {user.username}
+                  </span>
+                </div>
+              ))
+            )}
           </div>
-
         </div>
-
       </div>
 
       {/* Right */}
@@ -156,9 +157,7 @@ export default function TopBar() {
             className="text-zinc-400"
           />
         </button>
-
       </div>
-
     </header>
   );
 }

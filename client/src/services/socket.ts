@@ -11,3 +11,23 @@ socket.on("connect", () => {
 socket.on("disconnect", () => {
   console.log("❌ Disconnected");
 });
+
+/* ---------- User Registration ---------- */
+
+export function registerUser(username: string) {
+  socket.emit("register-user", username);
+}
+
+/* ---------- Online Users ---------- */
+
+export function onUsersUpdated(
+  callback: (users: { socketId: string; username: string }[]) => void,
+) {
+  socket.on("users-updated", callback);
+}
+
+export function offUsersUpdated(
+  callback: (users: { socketId: string; username: string }[]) => void,
+) {
+  socket.off("users-updated", callback);
+}

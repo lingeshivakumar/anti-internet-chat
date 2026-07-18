@@ -8,10 +8,14 @@ import MessageInput from "./MessageInput";
 import {
   chatService,
   type ChatMessage,
+  type ConnectedUser,
 } from "../services/chat.service";
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [onlineUsers, setOnlineUsers] = useState<ConnectedUser[]>([]);
+
+  const currentUser = getIdentity();
 
   useEffect(() => {
     const handleMessage = (message: ChatMessage) => {
@@ -20,12 +24,17 @@ export default function ChatWindow() {
 
     chatService.onMessage(handleMessage);
 
+    // Register this user with the server
+    chatService.registerUser(currentUser.name);
+
+    // Listen for online user updates
+    chatService.onUsersUpdated(setOnlineUsers);
+
     return () => {
       chatService.offMessage(handleMessage);
+      chatService.offUsersUpdated(setOnlineUsers);
     };
   }, []);
-
-  const currentUser = getIdentity();
 
   const handleSend = (content: string) => {
     chatService.sendMessage({
@@ -104,7 +113,7 @@ export default function ChatWindow() {
           shadow-[0_8px_30px_rgba(0,0,0,0.18)]
         "
       >
-        <TopBar />
+        <TopBar users={onlineUsers} />
       </div>
 
       {/* Messages */}

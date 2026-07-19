@@ -17,29 +17,29 @@ export default function ChatWindow() {
 
   const currentUser = getIdentity();
 
-  useEffect(() => {
-    const handleMessage = (message: ChatMessage) => {
-      setMessages((previous) => [...previous, message]);
-    };
+    useEffect(() => {
 
-    chatService.onMessage(handleMessage);
+      const handleMessage = (message: ChatMessage) => {
 
-    // Register this user with the server
-    const handleConnect = () => {
-      chatService.registerUser(currentUser.name);
-    };
+        setMessages((previous) => [...previous, message]);
 
-    chatService.onConnect(handleConnect);
+      };
 
-    // Listen for online user updates
-    chatService.onUsersUpdated(setOnlineUsers);
+      chatService.onMessage(handleMessage);
 
-    return () => {
-      chatService.offMessage(handleMessage);
-      chatService.offUsersUpdated(setOnlineUsers);
-      chatService.offConnect(handleConnect);
-    };
-  }, []);
+      chatService.registerCurrentUser(currentUser.name);
+
+      chatService.onUsersUpdated(setOnlineUsers);
+
+      return () => {
+
+        chatService.offMessage(handleMessage);
+
+        chatService.offUsersUpdated(setOnlineUsers);
+
+      };
+
+    }, []);
 
   const handleSend = (content: string) => {
     chatService.sendMessage({

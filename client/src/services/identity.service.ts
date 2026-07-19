@@ -5,23 +5,40 @@ export interface UserIdentity {
 
 const STORAGE_KEY = "anti-internet-chat-user";
 
+/* ---------------------------- Helpers ---------------------------- */
+
 function generateId(): string {
   return crypto.randomUUID();
 }
 
-function generateName(id: string): string {
-  return `User-${id.slice(0, 4)}`;
+/* ------------------------- Identity APIs ------------------------- */
+
+export function hasIdentity(): boolean {
+  return sessionStorage.getItem(STORAGE_KEY) !== null;
 }
 
-function createIdentity(): UserIdentity {
-  const id = generateId();
+export function getIdentity(): UserIdentity {
+  const stored = sessionStorage.getItem(STORAGE_KEY);
 
+  if (!stored) {
+    throw new Error("User identity not found.");
+  }
+
+  try {
+    return JSON.parse(stored) as UserIdentity;
+  } catch {
+    sessionStorage.removeItem(STORAGE_KEY);
+    throw new Error("Invalid user identity.");
+  }
+}
+
+export function setIdentity(name: string): UserIdentity {
   const identity: UserIdentity = {
-    id,
-    name: generateName(id),
+    id: generateId(),
+    name: name.trim(),
   };
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(identity),
   );
@@ -29,17 +46,6 @@ function createIdentity(): UserIdentity {
   return identity;
 }
 
-export function getIdentity(): UserIdentity {
-  const stored = localStorage.getItem(STORAGE_KEY);
-
-  if (!stored) {
-    return createIdentity();
-  }
-
-  try {
-    return JSON.parse(stored) as UserIdentity;
-  } catch {
-    localStorage.removeItem(STORAGE_KEY);
-    return createIdentity();
-  }
+export function clearIdentity() {
+  sessionStorage.removeItem(STORAGE_KEY);
 }

@@ -1,13 +1,11 @@
-    import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UserRound } from "lucide-react";
 
 interface NameModalProps {
   onContinue: (name: string) => void;
 }
 
-export default function NameModal({
-  onContinue,
-}: NameModalProps) {
+export default function NameModal({ onContinue }: NameModalProps) {
   const [name, setName] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -33,94 +31,92 @@ export default function NameModal({
         flex
         items-center
         justify-center
-        bg-[#090D13]/80
-        backdrop-blur-2xl
+        bg-black/40
+        backdrop-blur-xl
       "
     >
-      {/* Ambient Glow */}
-
+      {/* Ambient red glow — matches sidebar */}
       <div
         className="
           pointer-events-none
           absolute
+          -left-40
+          -top-20
           h-[700px]
           w-[700px]
           rounded-full
-          bg-[radial-gradient(circle,_rgba(56,100,255,0.20)_0%,_transparent_70%)]
+          bg-[radial-gradient(circle,_rgba(190,40,40,0.35)_0%,_rgba(190,40,40,0.1)_45%,_transparent_70%)]
           blur-3xl
         "
       />
 
-      {/* Card */}
+      {/* Secondary cool glow — matches chat panel */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -bottom-40
+          -right-52
+          h-[600px]
+          w-[600px]
+          rounded-full
+          bg-[radial-gradient(circle,_rgba(30,45,80,0.45)_0%,_transparent_70%)]
+          blur-3xl
+        "
+      />
 
+      {/* Card: Upgraded to Apple-Style Premium Frosted Glass */}
       <div
         className="
           relative
           w-[92%]
-          max-w-md
+          max-w-sm
           rounded-3xl
           border
-          border-white/10
-          bg-[#11161D]/80
+          border-white/[0.18]
+          bg-white/[0.04]
           p-8
           backdrop-blur-2xl
-          shadow-[0_25px_80px_rgba(0,0,0,0.55)]
+          shadow-[0_24px_50px_-12px_rgba(0,0,0,0.7)]
         "
       >
         {/* Icon */}
-
         <div
           className="
             mx-auto
-            mb-6
+            mb-5
             flex
             h-16
             w-16
             items-center
             justify-center
             rounded-full
-            bg-[#1A202B]
+            border
+            border-white/[0.12]
+            bg-white/[0.06]
+            backdrop-blur-md
           "
         >
-          <UserRound
-            size={28}
-            className="text-emerald-400"
-          />
+          <UserRound size={26} className="text-white-100" />
         </div>
 
-        <h1
-          className="
-            text-center
-            text-2xl
-            font-bold
-            text-white
-          "
-        >
+        <h1 className="text-center text-xl font-medium text-white/90 tracking-wide">
           Welcome
         </h1>
 
-        <p
-          className="
-            mt-3
-            text-center
-            text-sm
-            leading-relaxed
-            text-zinc-400
-          "
-        >
+        <p className="mt-2.5 text-center text-[13px] leading-relaxed text-white/60">
           Choose a display name for this session.
           <br />
-          It will only exist until you close this tab.
+          It only exists until you close this tab.
         </p>
 
-        {/* Input */}
-
+        {/* Input: Transparent Glass Cutout */}
         <input
           ref={inputRef}
           type="text"
           maxLength={20}
           value={name}
-          placeholder="Display name"
+          placeholder="Enter your name"
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -128,40 +124,51 @@ export default function NameModal({
             }
           }}
           className="
-            mt-8
+            mt-7
             h-12
             w-full
-            rounded-xl
+            rounded-full
             border
-            border-white/10
-            bg-[#1A202B]
-            px-4
+            border-white/[0.1]
+            bg-black/[0.2]
+            backdrop-blur-md
+            px-5
+            text-[14px]
             text-white
+            placeholder-white/30
             outline-none
             transition-all
-            placeholder:text-zinc-500
-            focus:border-emerald-400
+            focus:border-white/[0.25]
+            focus:bg-black/[0.3]
           "
         />
 
-        {/* Continue */}
-
+        {/* Continue: Premium Glass Action Button */}
         <button
           onClick={handleContinue}
           disabled={!name.trim()}
           className="
-            mt-6
+            mt-5
             h-12
             w-full
-            rounded-xl
-            bg-emerald-500
-            text-sm
-            font-semibold
-            text-black
+            rounded-full
+            bg-white/[0.08]
+            text-[14px]
+            font-medium
+            text-white
+            border
+            border-white/[0.15]
+            backdrop-blur-xl
+            shadow-[0_4px_12px_rgba(0,0,0,0.2)]
             transition-all
-            hover:bg-emerald-400
+            duration-300
             disabled:cursor-not-allowed
-            disabled:opacity-40
+            disabled:opacity-20
+            disabled:bg-white/[0.02]
+            disabled:border-white/[0.05]
+            enabled:hover:bg-white/[0.16]
+            enabled:hover:border-white/[0.3]
+            enabled:hover:shadow-[0_0_24px_rgba(255,255,255,0.08)]
           "
         >
           Continue

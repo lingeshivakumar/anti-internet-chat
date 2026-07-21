@@ -86,18 +86,18 @@ export default function NameModal({ onContinue }: NameModalProps) {
             mx-auto
             mb-5
             flex
-            h-16
-            w-16
+            h-18
+            w-18
             items-center
             justify-center
             rounded-full
             border
-            border-white/[0.12]
+            border-white/[0.15]
             bg-white/[0.06]
             backdrop-blur-md
           "
         >
-          <UserRound size={26} className="text-white-100" />
+          <UserRound size={25} className="text-white-100" />
         </div>
 
         <h1 className="text-center text-xl font-medium text-white/90 tracking-wide">
@@ -114,7 +114,7 @@ export default function NameModal({ onContinue }: NameModalProps) {
         <input
           ref={inputRef}
           type="text"
-          maxLength={20}
+          maxLength={30}
           value={name}
           placeholder="Enter your name"
           onChange={(e) => setName(e.target.value)}
@@ -159,7 +159,7 @@ export default function NameModal({ onContinue }: NameModalProps) {
             border
             border-white/[0.15]
             backdrop-blur-xl
-            shadow-[0_4px_12px_rgba(0,0,0,0.2)]
+            shadow-[0_4px_12px_rgba(0,0,0,0.3)]
             transition-all
             duration-300
             disabled:cursor-not-allowed

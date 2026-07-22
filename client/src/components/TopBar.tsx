@@ -148,7 +148,7 @@ export default function TopBar({
             bg-[#1A202B]
             transition-all
             duration-300
-            hover:rotate-90
+            hover:rotate-360
             hover:bg-[#232B39]
           "
         >

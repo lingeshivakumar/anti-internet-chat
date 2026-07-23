@@ -54,7 +54,7 @@ export default function TopBar({
               text-white
             "
           >
-            Active Users ({users.length})
+            Active Users - {users.length}
           </h2>
 
           {/* User Pills */}
@@ -76,11 +76,11 @@ export default function TopBar({
                     px-3
                     py-1.5
                     transition-all
-                    duration-300
+                    duration-150
                     hover:bg-[#232B39]
                   "
                 >
-                  <div className="h-2 w-2 rounded-full bg-emerald-400" />
+                  <div className="h-2 w-2 rounded-2xl bg-blue-400" />
 
                   <span
                     className="
@@ -108,33 +108,6 @@ export default function TopBar({
           gap-3
         "
       >
-        {/* Encryption Badge */}
-        <div
-          className="
-            hidden
-            sm:flex
-            items-center
-            gap-2
-            rounded-full
-            bg-[#1A202B]
-            px-4
-            py-2
-          "
-        >
-          <ShieldCheck
-            size={16}
-            className="text-emerald-400"
-          />
-
-          <span
-            className="
-              text-sm
-              text-zinc-300
-            "
-          >
-            Encrypted
-          </span>
-        </div>
 
         {/* Menu */}
         <button
@@ -154,7 +127,7 @@ export default function TopBar({
         >
           <MoreHorizontal
             size={18}
-            className="text-zinc-400"
+            className="text-emerald-400"
           />
         </button>
       </div>

@@ -1,5 +1,4 @@
 import {
-  ShieldCheck,
   MoreHorizontal,
   Users,
 } from "lucide-react";
